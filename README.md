@@ -2,11 +2,11 @@
 
 You can set the target and destination folder inside the script at the top. Make sure they are not the same or empty or subfolders of each other. Install python with:
 
-  sudo apt install python
+    sudo apt install python
 
 Save the code above to repository.py. Then you can run the sript using a console and:
 
-  python repository.py
+    python repository.py
 
 All files inside the source folder will be copied to the target folder. When there is already a version existing in the target folder, the script will check if it is old and copy it with an incremented version number in that case.
 
