@@ -39,12 +39,18 @@ while argIndex < len(sys.argv):
 	if sys.argv[argIndex] == "-s":
 		#next arg must be the source
 		argIndex += 1
+		if argIndex >= len(sys.argv):
+			print "nach -s muss der Pfad zum Quellordner angegeben werden!"
+			exit()
 		source = sys.argv[argIndex]
 
 	#-d: destination
 	if sys.argv[argIndex] == "-d":
 		#next arg must be the source
 		argIndex += 1
+		if argIndex >= len(sys.argv):
+			print "nach -d muss der Pfad zum Zielordner angegeben werden!"
+			exit()
 		target = sys.argv[argIndex]
 
 	argIndex += 1
