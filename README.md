@@ -1,6 +1,6 @@
 # Backup-Repository-and-Version-Control-Script
 
-You can set the target and destination folder inside the script at the top. Make sure they are not the same or empty or subfolders of each other. Install python with:
+You can set the target and destination folder using argvs (see below). Make sure they are not the same or empty or subfolders of each other. Install python with:
 
     sudo apt install python
 
