@@ -1,16 +1,53 @@
 # -*- coding: utf-8 -*-
 from shutil import copyfile
-import os, time
+import os, time, sys
 
 
 #konfiguration
-source = r"source" #quellordner
-target = r"target" #zielordner
+source = r"" #quellordner
+target = r"" #zielordner
 #duerfen nicht identisch sein
 #duerfen nicht unterordner von einander sein
 
 
 
+
+#argv:
+goahead = 0
+argIndex = 1
+while argIndex < len(sys.argv):
+
+	if sys.argv[argIndex] == "-h" or sys.argv[argIndex] == "--help":
+		print "Script zum Anlegen von Sicherheitskopien mit Versionsnummern"
+		print ""
+		print "Verwendung:"
+		print "  -s  Quellordner"
+		print "  -d  Zielordner"
+		print "  -y  Automatisch mit \"ja\" Antworten solange kein Fehler erscheint"
+		print "  -h  Hilfe"
+		print ""
+		print "Beispiel:"
+		print "  python repository.py -s \"source/\" -d \"destination/\""
+		print ""
+		exit()
+
+	#-y: tell the script to go ahead without asking
+	if sys.argv[argIndex] == "-y":
+		goahead = 1
+
+	#-s: source
+	if sys.argv[argIndex] == "-s":
+		#next arg must be the source
+		argIndex += 1
+		source = sys.argv[argIndex]
+
+	#-d: destination
+	if sys.argv[argIndex] == "-d":
+		#next arg must be the source
+		argIndex += 1
+		target = sys.argv[argIndex]
+
+	argIndex += 1
 
 #prepare:
 separator = os.path.sep
@@ -33,42 +70,43 @@ if source == target:
 	print("Quelle und Ziel sind identisch!")
 	exception = 1
 if source == "":
-	print("Es wurde keine Quelle im Script angegeben!");
+	print("Es wurde keine Quelle angegeben! (z.B. als Argument -s \"quelle/\")");
 	exception = 1
 if target == "":
-	print("Es wurde kein Ziel im Script angegeben!");
+	print("Es wurde kein Ziel angegeben! (z.B. als Argument -d \"quelle/\")");
 	exception = 1
 if not os.path.exists(source):
 	print("Der Quellordner existiert nicht!");
 	exception = 1
 if exception:
 	print
-	print("Mit dem Texteditor die Variablen \"source\" und \"target\" konfigurieren.")
+	#print("Mit dem Texteditor die Variablen \"source\" und \"target\" konfigurieren.")
 	print("beliebige Taste drücken...".decode("iso-8859-1"))
 	raw_input()
 	exit()
 
 #get user confirmation
-yesno = "j"
-if not os.path.exists(target):
-	#target folder will be created inside the loop
-	yesno = str(raw_input("Der Zieldordner existiert noch nicht. Neu anlegen? [j/n]: "))
-if yesno.lower().rfind("j") == -1:
-	print("Mit dem Texteditor die Variable \"target\" konfigurieren.")
-	print("beliebige Taste drücken...".decode("iso-8859-1"))
-	raw_input()
-	exit()
-print("")
-print("Quelle ist "+source.decode("iso-8859-1"))
-print("Ziel ist "+target.decode("iso-8859-1"))
-yesno = str(raw_input("Fortfahren? [j/n]: "))
-if yesno.lower().rfind("j") == -1:
-	print("Mit dem Texteditor bei Bedarf die Variablen \"source\" und \"target\" konfigurieren.")
-	print("beliebige Taste drücken...".decode("iso-8859-1"))
-	raw_input()
-	exit()
-else:
+if goahead == 0:
+	yesno = "j"
+	if not os.path.exists(target):
+		#target folder will be created inside the loop
+		yesno = str(raw_input("Der Zieldordner existiert noch nicht. Neu anlegen? [j/n]: "))
+	if yesno.lower().rfind("j") == -1:
+		print("Mit dem Texteditor die Variable \"target\" konfigurieren.")
+		print("beliebige Taste drücken...".decode("iso-8859-1"))
+		raw_input()
+		exit()
 	print("")
+	print("Quelle ist "+source.decode("iso-8859-1"))
+	print("Ziel ist "+target.decode("iso-8859-1"))
+	yesno = str(raw_input("Fortfahren? [j/n]: "))
+	if yesno.lower().rfind("j") == -1:
+		#print("Mit dem Texteditor bei Bedarf die Variablen \"source\" und \"target\" konfigurieren.")
+		print("beliebige Taste drücken...".decode("iso-8859-1"))
+		raw_input()
+		exit()
+	else:
+		print("")
 
 #in no case should the target or source be a empty "" string by now
 
