@@ -4,8 +4,8 @@ import os, time
 
 
 #konfiguration
-source = r"" #quellordner
-target = r"" #zielordner
+source = r"source" #quellordner
+target = r"target" #zielordner
 #duerfen nicht identisch sein
 #duerfen nicht unterordner von einander sein
 
@@ -113,7 +113,7 @@ for filePath, subFolders, fileNames in os.walk(source):
 			path = (target+separator+relativePath).replace(separator+separator,separator)
 			print("Konnte den Ordner "+path+" nicht erstellen")
 			break
-	
+
 		#reset file version counter
 		versionCounter = 0;
 		#get the most recent version in the repository
@@ -125,12 +125,16 @@ for filePath, subFolders, fileNames in os.walk(source):
 		for candidate in os.listdir(target+separator+relativePath):
 			if candidate[0:candidate.rfind("(")+1] == fileName+"(" and candidate[-len(fileType)-1:] == ")"+fileType:
 				try:
-					versionCounter = int(candidate[candidate.rfind("(")+1:-len(fileType)-1])
-					repositoryDate = time.ctime(os.path.getmtime(target+separator+relativePath+candidate))
+					newVersionCounter = int(candidate[candidate.rfind("(")+1:-len(fileType)-1])
+					#if the found file is the newest file (os.walk does not take care about ordering the filenames)
+					if newVersionCounter > versionCounter:
+						versionCounter = newVersionCounter
+						repositoryDate = time.ctime(os.path.getmtime(target+separator+relativePath+candidate))
 				except: #if the version in the filename could not be parsed/found just go on and do nothing.
 					path = (target+relativePath+separator+candidate).replace(separator+separator,separator)
 					print(("Die Datei "+path+" hat keine oder eine fehlerhafte Versionsnummer!").decode("iso-8859-1"))
 					#this is not a criteria to skip that file. It will copy the source file and add a (hopefully) correct version number to it
+
 
 		#now increment to store a new version
 		versionCounter += 1
@@ -139,7 +143,7 @@ for filePath, subFolders, fileNames in os.walk(source):
 		if not (repositoryDate == fileDate):
 			cpSrc = (source+separator+relativePath+fileName+fileType).replace(separator+separator,separator)
 			cpTrg = (target+separator+relativePath+fileName+"("+str(versionCounter)+")"+fileType).replace(separator+separator,separator)
-			cpTrg = cpTrg.decode("iso-8859-1")		
+			cpTrg = cpTrg.decode("iso-8859-1")
 
 			print((cpSrc+" wird neu in den Zielordner kopiert mit Versionsnr. "+str(versionCounter)).decode("iso-8859-1"))
 			if repositoryDate != 0:
@@ -147,7 +151,7 @@ for filePath, subFolders, fileNames in os.walk(source):
 			print(str(fileDate))
 			#for a better user experience
 			changedCount += 1
-			
+
 			try:
 				copyfile(cpSrc,cpTrg)
 			except:
@@ -155,7 +159,7 @@ for filePath, subFolders, fileNames in os.walk(source):
 				break
 			#python will override the modified date when copying. That's why the script needs to change it back
 			os.utime(cpTrg,(fileDateFloat,fileDateFloat))
-				
+
 #end
 if changedCount == 0:
 	print("Keine neuen Dateien erkannt")
