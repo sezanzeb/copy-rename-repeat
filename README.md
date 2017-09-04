@@ -4,7 +4,7 @@ You can set the target and destination folder using argvs (see below). Make sure
 
     sudo apt install python
 
-Save the code above to repository.py. Then you can run the script using a console and:
+Then you can run the script using a console and:
 
     python repository.py -s "source/" -d "destination/"
 
