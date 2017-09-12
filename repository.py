@@ -63,9 +63,23 @@ if source != "":
 if target != "":
 	target = (target+separator).replace(separator+separator,separator)
 
-#validate:
+#validate step one:
 exception = 0
+if source == "":
+	print("Es wurde keine Quelle angegeben! (z.B. als Argument -s \"quelle/\")");
+	exception = 1
+if target == "":
+	print("Es wurde kein Ziel angegeben! (z.B. als Argument -d \"quelle/\")");
+	exception = 1
+if exception:
+	print
+	print("Siehe: python repository.py --help")
+	print("beliebige Taste drücken...".decode("iso-8859-1"))
+	raw_input()
+	exit()
 
+#validate step two:
+exception = 0
 if source.rfind(target) == 0: #this relies on the path being complete, including a separator at the end
 	print("Der Quellordner darf kein Unterordner des Zielordners sein!")
 	exception = 1
@@ -74,12 +88,6 @@ if target.rfind(source) == 0: #this relies on the path being complete, including
 	exception = 1
 if source == target:
 	print("Quelle und Ziel sind identisch!")
-	exception = 1
-if source == "":
-	print("Es wurde keine Quelle angegeben! (z.B. als Argument -s \"quelle/\")");
-	exception = 1
-if target == "":
-	print("Es wurde kein Ziel angegeben! (z.B. als Argument -d \"quelle/\")");
 	exception = 1
 if not os.path.exists(source):
 	print("Der Quellordner existiert nicht!");
