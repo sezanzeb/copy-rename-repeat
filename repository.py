@@ -86,7 +86,7 @@ if not os.path.exists(source):
 	exception = 1
 if exception:
 	print
-	#print("Mit dem Texteditor die Variablen \"source\" und \"target\" konfigurieren.")
+	print("Siehe: python repository.py --help")
 	print("beliebige Taste drücken...".decode("iso-8859-1"))
 	raw_input()
 	exit()
@@ -98,7 +98,7 @@ if goahead == 0:
 		#target folder will be created inside the loop
 		yesno = str(raw_input("Der Zieldordner existiert noch nicht. Neu anlegen? [j/n]: "))
 	if yesno.lower().rfind("j") == -1:
-		print("Mit dem Texteditor die Variable \"target\" konfigurieren.")
+		print("Siehe: python repository.py --help")
 		print("beliebige Taste drücken...".decode("iso-8859-1"))
 		raw_input()
 		exit()
@@ -107,7 +107,7 @@ if goahead == 0:
 	print("Ziel ist "+target.decode("iso-8859-1"))
 	yesno = str(raw_input("Fortfahren? [j/n]: "))
 	if yesno.lower().rfind("j") == -1:
-		#print("Mit dem Texteditor bei Bedarf die Variablen \"source\" und \"target\" konfigurieren.")
+		print("Siehe: python repository.py --help")
 		print("beliebige Taste drücken...".decode("iso-8859-1"))
 		raw_input()
 		exit()
