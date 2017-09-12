@@ -19,15 +19,24 @@ while argIndex < len(sys.argv):
 
 	if sys.argv[argIndex] == "-h" or sys.argv[argIndex] == "--help":
 		print "Script zum Anlegen von Sicherheitskopien mit Versionsnummern"
+		print "https://github.com/sezanzeb/Backup-Repository-and-Version-Control-Script"
+		print ""
+		print "Zu beachten:"
+		print "  Der Quellordner darf kein Unterordner des Zielordners sein."
+		print "  Der Zielordner darf kein Unterordner des Quellordners sein."
+		print "  Quell- und Zielordner dürfen nicht identisch sein."
+		print "  Die Pfade von Quell- und Zielordner dürfen nicht leer sein. Der aktuelle Ordner kann so gewählt werden: \"./\"."
 		print ""
 		print "Verwendung:"
+		print "  python repository.sh [optionen]"
 		print "  -s  Quellordner"
 		print "  -d  Zielordner"
 		print "  -y  Automatisch mit \"ja\" Antworten solange kein Fehler erscheint"
 		print "  -h  Hilfe"
 		print ""
-		print "Beispiel:"
+		print "Beispiele:"
 		print "  python repository.py -s \"source/\" -d \"destination/\""
+		print "  python repository.py -s ./ -d ../ordner/ -y"
 		print ""
 		exit()
 
