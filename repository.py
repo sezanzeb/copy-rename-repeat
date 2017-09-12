@@ -28,7 +28,7 @@ while argIndex < len(sys.argv):
 		print "  Die Pfade von Quell- und Zielordner dürfen nicht leer sein. Der aktuelle Ordner kann so gewählt werden: \"./\"."
 		print ""
 		print "Verwendung:"
-		print "  python repository.sh [optionen]"
+		print "  python repository.py [optionen]"
 		print "  -s  Quellordner"
 		print "  -d  Zielordner"
 		print "  -y  Automatisch mit \"ja\" Antworten solange kein Fehler erscheint"
@@ -41,11 +41,11 @@ while argIndex < len(sys.argv):
 		exit()
 
 	#-y: tell the script to go ahead without asking
-	if sys.argv[argIndex] == "-y":
+	elif sys.argv[argIndex] == "-y":
 		goahead = 1
 
 	#-s: source
-	if sys.argv[argIndex] == "-s":
+	elif sys.argv[argIndex] == "-s":
 		#next arg must be the source
 		argIndex += 1
 		if argIndex >= len(sys.argv):
@@ -54,13 +54,18 @@ while argIndex < len(sys.argv):
 		source = sys.argv[argIndex]
 
 	#-d: destination
-	if sys.argv[argIndex] == "-d":
+	elif sys.argv[argIndex] == "-d":
 		#next arg must be the source
 		argIndex += 1
 		if argIndex >= len(sys.argv):
 			print "nach -d muss der Pfad zum Zielordner angegeben werden!"
 			exit()
 		target = sys.argv[argIndex]
+
+	else:
+		print "unbekannte option \"" + sys.argv[argIndex] + "\"!"
+		print("Siehe: python repository.py --help")
+		exit()
 
 	argIndex += 1
 
