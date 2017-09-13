@@ -4,11 +4,15 @@ You can set the target and destination folder using argvs (see below). Make sure
 
     sudo apt install python
 
-Then you can run the script using a console and:
-
-    python repository.py -s "source/" -d "destination/"
+Displaying delp:
 
     python repository.py --help
+    
+Examples:
+    
+    python repository.py -s "source/" -d "destination/"
+
+    python repository.py -s ./ -d ../ordner/ -y"
 
 All new/changed files inside the source folder will be copied to the target folder. When there is already a version existing in the target folder, the script will check if it is old and copy it with an incremented version number in that case.
 
