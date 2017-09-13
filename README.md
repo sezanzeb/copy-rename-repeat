@@ -1,7 +1,12 @@
 # Copy Rename Repeat
 
-You can set the target and destination folder using argvs (see below). Make sure they are not the same or empty or subfolders of each other. Install python with:
+You can set the target and destination folder using argvs (see below). Make sure they are not the same or empty or subfolders of each other.
 
+Works with Python 2.7
+
+Install python on debian/ubuntu with:
+
+    sudo apt update
     sudo apt install python
 
 Displaying delp:
