@@ -9,7 +9,7 @@ Install python on debian/ubuntu with:
     sudo apt update
     sudo apt install python
 
-Displaying delp:
+Displaying help:
 
     python repository.py --help
     
@@ -17,7 +17,7 @@ Examples:
     
     python repository.py -s "source/" -d "destination/"
 
-    python repository.py -s ./ -d ../ordner/ -y"
+    python repository.py -s ./ -d ../ordner/ -y
 
 All new/changed files inside the source folder will be copied to the target folder. When there is already a version existing in the target folder, the script will check if it is old and copy it with an incremented version number in that case.
 
