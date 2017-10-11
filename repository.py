@@ -232,5 +232,8 @@ if changedCount == 0:
 else:
 	print
 	print(str(changedCount)+" geänderte Dateien wurden erkannt".decode("iso-8859-1"))
-print("beliebige Taste drücken...".decode("iso-8859-1"))
-raw_input()
+	
+
+if goahead == 0:
+	print("beliebige Taste drücken...".decode("iso-8859-1"))
+	raw_input()
