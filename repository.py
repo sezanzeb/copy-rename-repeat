@@ -36,7 +36,7 @@ while argIndex < len(sys.argv):
 		print ""
 		print "Beispiele:"
 		print "  python repository.py -s \"source/\" -d \"destination/\""
-		print "  python repository.py -s ./ -d ../ordner/ -y"
+		print "  python repository.py -s ./ -d ../ordner/ -y
 		print ""
 		exit()
 
